@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 
 import '../styles/App.css';
 
@@ -27,13 +27,33 @@ const data = {
   ]
 }
 const App = () => {
+  const [selected, setSelected] = useState("");
 
   return (
     <div id="main">
-      
+      <select defaultValue="null" onChange={(e) => setSelected(e.target.value)}>
+        <option value={null}></option>
+        <option value="2018">2018</option>
+        <option value="2019">2019</option>
+        <option value="2020">2020</option>
+        <option value="2021">2021</option>
+        <option value="2022">2022</option>
+      </select>
+      {selected ? (
+        <div id="selected-year">
+          Selected year-{selected}
+          <ul>
+            {data[selected].map((item, index) => (
+              <li key={index + 1}>{item}</li>
+            ))}
+          </ul>
+        </div>
+      ) : (
+        <div id="selected-year">No year selected</div>
+      )}
     </div>
-  )
-}
+  );
+};
 
 
 export default App;
